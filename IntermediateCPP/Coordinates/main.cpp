@@ -20,6 +20,32 @@ void printCoordFunction(Coordinate p)
     return;
 }
 
+// PASS-BY-VALUE VERSUS PASS-BY-REFERENCE
+// This function changes the x and y values of a 
+//    coordinate such that its new value is
+//    (x+xOffset, y+yOffset).
+// It takes one Coordinate argument and two integer
+//    arguments representing the x and y offsets.
+// It returns nothing.
+// NOTICE: If we pass-by-value (default behavior
+//    in C++), the changes to p do NOT persist 
+//    after we leave this function. That's not 
+//    what we want in this case.
+//    The solution is to pass p by reference,
+//    which means we precede it with an ampersand.
+// NOTICE: Since we are not changing xOffset or
+//    yOffset throughout this function, we should
+//    make them constant parameters to enforce
+//    that they should not be changed.
+//    We do this by declaring xOffset and yOffset
+//    to be "const" parameters.
+void translate(const Coordinate &p, const int xOffset, const int yOffset)
+{
+    p.x = p.x + xOffset;
+    p.y += yOffset; // Just another way to increment
+    return;
+}
+
 int main()
 {
     // Declare and initialize two coordinate
@@ -29,8 +55,9 @@ int main()
 
     // Syntax differences in calling class
     //    methods and standalone functions
-    //c1.printCoordMethod();
-    //printCoordFunction(c1);
+    c1.printCoordMethod();
+    printCoordFunction(c1);
+    cout << endl << endl;
 
     // Testing operator+()
     Coordinate c3 = Coordinate();
@@ -42,6 +69,10 @@ int main()
     //    overloading operator<<
     //cout << c3;
 
+    // Print c3 before and after translating
+    //    it by (1, 2).
+    c3.printCoordMethod();
+    translate(c3, 1, 2);
     c3.printCoordMethod();
 
     return 0;
