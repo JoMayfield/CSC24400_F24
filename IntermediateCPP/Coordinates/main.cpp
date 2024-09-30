@@ -16,7 +16,7 @@ using namespace std;
 //    like there is with one of the class methods.
 void printCoordFunction(Coordinate p)
 {
-    cout << "(" << p.x << ", " << p.y << ")" << endl;
+    cout << "(" << p.getX() << ", " << p.getY() << ")" << endl;
     return;
 }
 
@@ -39,7 +39,7 @@ void printCoordFunction(Coordinate p)
 //    that they should not be changed.
 //    We do this by declaring xOffset and yOffset
 //    to be "const" parameters.
-void translate(const Coordinate &p, const int xOffset, const int yOffset)
+void translate(Coordinate &p, const int xOffset, const int yOffset)
 {
     p.x = p.x + xOffset;
     p.y += yOffset; // Just another way to increment
@@ -65,15 +65,17 @@ int main()
     c3 = c1.operator+(c2);
     c3 = c1 + c2;
 
-    // Can't yet cout a Coordinate without
-    //    overloading operator<<
-    //cout << c3;
-
     // Print c3 before and after translating
     //    it by (1, 2).
     c3.printCoordMethod();
     translate(c3, 1, 2);
     c3.printCoordMethod();
+    cout << endl << endl;
+
+
+    // We can now cout a Coordinate!
+    Coordinate c4 = Coordinate(100, 100);
+    cout << c4 << "!!!" << endl << endl;
 
     return 0;
 }
